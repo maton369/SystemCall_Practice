@@ -82,31 +82,57 @@ set -e
 # ./getuid | tee output.log
 # rm -f getuid
 
-echo "[*] setuid.c をビルド中..."
-gcc -o setuid setuid.c
-echo "[*] root 所有の setuid 実行ファイルを作成..."
-chown root setuid
-chmod u+s setuid
-ls -l setuid
-ls -n setuid
+# echo "[*] setuid.c をビルド中..."
+# gcc -o setuid setuid.c
+# echo "[*] root 所有の setuid 実行ファイルを作成..."
+# chown root setuid
+# chmod u+s setuid
+# ls -l setuid
+# ls -n setuid
+# echo "[*] 現在のユーザー情報:"
+# id
+# echo "[*] ./setuid を一般ユーザーで実行:"
+# ./setuid || true  # 特権昇格に失敗してもスクリプトを止めない
+# echo
+# echo "[*] 一般ユーザーで再実行できるように apache 所有に変更..."
+# chown apache setuid
+# chmod u+s setuid
+# ls -l setuid
+# ls -n setuid
+# echo "[*] ./setuid を再実行:"
+# ./setuid || true
+# echo
+# echo "[*] root 所有に戻して再実行（戻れないパターンを確認）..."
+# chown root setuid
+# chmod u+s setuid
+# ls -l setuid
+# ./setuid || true | tee output.log
+# echo
+# echo "[*] クリーンアップ..."
+# rm -f setuid
+
+echo "[*] seteuid.c をビルド中..."
+gcc -o seteuid seteuid.c
+if ! id apache >/dev/null 2>&1; then
+  echo "[*] 一時ユーザー 'apache' を作成中..."
+  useradd -M -s /sbin/nologin apache
+fi
+echo "[*] apache 所有の seteuid 実行ファイルを作成..."
+chown apache seteuid
+chmod u+s seteuid
+echo "[*] seteuid 実行ファイルの属性:"
+ls -l seteuid
+ls -n seteuid
 echo "[*] 現在のユーザー情報:"
 id
-echo "[*] ./setuid を一般ユーザーで実行:"
-./setuid || true  # 特権昇格に失敗してもスクリプトを止めない
+echo "[*] ./seteuid を一般ユーザーで実行:"
+./seteuid || true
 echo
-echo "[*] 一般ユーザーで再実行できるように apache 所有に変更..."
-chown apache setuid
-chmod u+s setuid
-ls -l setuid
-ls -n setuid
-echo "[*] ./setuid を再実行:"
-./setuid || true
-echo
-echo "[*] root 所有に戻して再実行（戻れないパターンを確認）..."
-chown root setuid
-chmod u+s setuid
-ls -l setuid
-./setuid || true | tee output.log
+echo "[*] root 所有に戻して再実行（rootの動作確認）..."
+chown root seteuid
+chmod u+s seteuid
+ls -l seteuid
+./seteuid || true | tee output.log
 echo
 echo "[*] クリーンアップ..."
-rm -f setuid
+rm -f seteuid
