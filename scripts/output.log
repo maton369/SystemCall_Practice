@@ -1,2 +1,2 @@
-parent process
-child process
+Hello, from parent
+Hello, from child
