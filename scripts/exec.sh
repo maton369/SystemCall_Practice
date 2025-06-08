@@ -37,6 +37,17 @@
 # ./fchdir | tee output.log
 # rm -f fchdir
 
-gcc -o chroot chroot.c
-./chroot | tee output.log
-rm -f chroot
+# gcc -o chroot chroot.c
+# ./chroot > output.log 2>&1 &
+# PID=$!
+# sleep 1
+# echo ">>> プロセス $PID のルート確認:"
+# if readlink "/proc/$PID/root" 2>/dev/null; then
+#     echo ">>> chroot 確認成功"
+# else
+#     echo ">>> chroot 確認失敗（プロセスが終了した可能性あり）"
+# fi
+# echo ">>> 出力内容:"
+# cat output.log
+# rm -f chroot
+
