@@ -68,16 +68,45 @@ set -e
 # rm -f setpriority
 # rm -f getpriority
 
-getent group mail >/dev/null || groupadd mail
-id apache >/dev/null 2>&1 || useradd -g mail apache
-gcc -o getuid getuid.c
-chown apache:mail getuid
-chmod ug+s getuid
-echo ">>> getuid 実行ファイルの属性:"
-ls -l getuid
-ls -n getuid
-echo ">>> id コマンドによる現在のユーザー情報:"
+# getent group mail >/dev/null || groupadd mail
+# id apache >/dev/null 2>&1 || useradd -g mail apache
+# gcc -o getuid getuid.c
+# chown apache:mail getuid
+# chmod ug+s getuid
+# echo ">>> getuid 実行ファイルの属性:"
+# ls -l getuid
+# ls -n getuid
+# echo ">>> id コマンドによる現在のユーザー情報:"
+# id
+# echo ">>> getuid 実行:"
+# ./getuid | tee output.log
+# rm -f getuid
+
+echo "[*] setuid.c をビルド中..."
+gcc -o setuid setuid.c
+echo "[*] root 所有の setuid 実行ファイルを作成..."
+chown root setuid
+chmod u+s setuid
+ls -l setuid
+ls -n setuid
+echo "[*] 現在のユーザー情報:"
 id
-echo ">>> getuid 実行:"
-./getuid | tee output.log
-rm -f getuid
+echo "[*] ./setuid を一般ユーザーで実行:"
+./setuid || true  # 特権昇格に失敗してもスクリプトを止めない
+echo
+echo "[*] 一般ユーザーで再実行できるように apache 所有に変更..."
+chown apache setuid
+chmod u+s setuid
+ls -l setuid
+ls -n setuid
+echo "[*] ./setuid を再実行:"
+./setuid || true
+echo
+echo "[*] root 所有に戻して再実行（戻れないパターンを確認）..."
+chown root setuid
+chmod u+s setuid
+ls -l setuid
+./setuid || true | tee output.log
+echo
+echo "[*] クリーンアップ..."
+rm -f setuid
