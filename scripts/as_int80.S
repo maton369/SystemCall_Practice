@@ -1,5 +1,4 @@
-#include <sys/syscall.h>  
-# include syscall number definitions
+#include <sys/syscall.h>  # include syscall number definitions
 
     .section .text        # code section
     .globl _start         # declare _start as global
