@@ -52,10 +52,15 @@
 # rm -f chroot
 
 gcc -o getpriority getpriority.c
-echo "通常実行:"
-./getpriority
-echo "nice 経由実行:"
-nice ./getpriority
-echo "nice -19 指定実行:"
-nice -n 19 ./getpriority
+# echo "通常実行:"
+# ./getpriority
+# echo "nice 経由実行:"
+# nice ./getpriority
+# echo "nice -19 指定実行:"
+# nice -n 19 ./getpriority
+# rm -f getpriority
+
+gcc -o setpriority setpriority.c
+./setpriority | tee output.log
+rm -f setpriority
 rm -f getpriority
