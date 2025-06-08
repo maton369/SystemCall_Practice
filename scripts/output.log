@@ -1,3 +1,2 @@
-parent process
-child process
-pid = 140 exited with status = 12
+141
+pid = 149, ppid = 141

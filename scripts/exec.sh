@@ -21,5 +21,10 @@
 # gcc -o wait4 wait4.c
 # ./wait4 | tee output.log
 
-gcc -o waitid waitid.c
-./waitid | tee output.log
+# gcc -o waitid waitid.c
+# ./waitid | tee output.log
+
+gcc -o getpid getpid.c
+echo $$ | tee output.log
+./getpid | tee -a output.log
+rm -f getpid
