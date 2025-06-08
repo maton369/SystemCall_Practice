@@ -29,6 +29,10 @@
 # ./getpid | tee -a output.log
 # rm -f getpid
 
-gcc -o chdir chdir.c
-./chdir | tee output.log
-rm -f chdir
+# gcc -o chdir chdir.c
+# ./chdir | tee output.log
+# rm -f chdir
+
+gcc -o fchdir fchdir.c
+./fchdir | tee output.log
+rm -f fchdir
