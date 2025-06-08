@@ -12,5 +12,8 @@
 # ./exit | tee output.log
 # echo $? |tee -a output.log
 
-gcc -o wait wait.c
-./wait | tee output.log
+# gcc -o wait wait.c
+# ./wait | tee output.log
+
+gcc -o waitpid waitpid.c
+./waitpid | tee output.log
