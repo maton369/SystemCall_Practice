@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # ps aux | tee output.log
 
 # gcc -o fork fork.c
@@ -51,7 +53,7 @@
 # cat output.log
 # rm -f chroot
 
-gcc -o getpriority getpriority.c
+# gcc -o getpriority getpriority.c
 # echo "通常実行:"
 # ./getpriority
 # echo "nice 経由実行:"
@@ -60,7 +62,22 @@ gcc -o getpriority getpriority.c
 # nice -n 19 ./getpriority
 # rm -f getpriority
 
-gcc -o setpriority setpriority.c
-./setpriority | tee output.log
-rm -f setpriority
-rm -f getpriority
+# gcc -o getpriority getpriority.c
+# gcc -o setpriority setpriority.c
+# ./setpriority | tee output.log
+# rm -f setpriority
+# rm -f getpriority
+
+getent group mail >/dev/null || groupadd mail
+id apache >/dev/null 2>&1 || useradd -g mail apache
+gcc -o getuid getuid.c
+chown apache:mail getuid
+chmod ug+s getuid
+echo ">>> getuid 実行ファイルの属性:"
+ls -l getuid
+ls -n getuid
+echo ">>> id コマンドによる現在のユーザー情報:"
+id
+echo ">>> getuid 実行:"
+./getuid | tee output.log
+rm -f getuid
