@@ -33,6 +33,10 @@
 # ./chdir | tee output.log
 # rm -f chdir
 
-gcc -o fchdir fchdir.c
-./fchdir | tee output.log
-rm -f fchdir
+# gcc -o fchdir fchdir.c
+# ./fchdir | tee output.log
+# rm -f fchdir
+
+gcc -o chroot chroot.c
+./chroot | tee output.log
+rm -f chroot
