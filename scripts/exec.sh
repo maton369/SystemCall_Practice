@@ -24,7 +24,11 @@
 # gcc -o waitid waitid.c
 # ./waitid | tee output.log
 
-gcc -o getpid getpid.c
-echo $$ | tee output.log
-./getpid | tee -a output.log
-rm -f getpid
+# gcc -o getpid getpid.c
+# echo $$ | tee output.log
+# ./getpid | tee -a output.log
+# rm -f getpid
+
+gcc -o chdir chdir.c
+./chdir | tee output.log
+rm -f chdir
