@@ -1,3 +1,5 @@
-child process
 parent process
-pid = 122 exited with status = 12
+child process
+pid = 131 exited with status = 12
+user time   = 0.000347 sec
+system time = 0.000000 sec

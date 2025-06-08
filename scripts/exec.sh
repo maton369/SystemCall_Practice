@@ -15,5 +15,8 @@
 # gcc -o wait wait.c
 # ./wait | tee output.log
 
-gcc -o waitpid waitpid.c
-./waitpid | tee output.log
+# gcc -o waitpid waitpid.c
+# ./waitpid | tee output.log
+
+gcc -o wait4 wait4.c
+./wait4 | tee output.log
