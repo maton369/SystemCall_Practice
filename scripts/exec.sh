@@ -7,10 +7,14 @@ set -e  # エラー時に即終了
 # ./as_int80 | tee output.log
 # echo "[*] Done. Output saved to output.log"
 
-echo "[*] as_sysenter をビルドしています（32ビット）..."
-gcc -m32 -no-pie -o as_sysenter as_sysenter.S -nostdlib
+# echo "[*] as_sysenter をビルドしています（32ビット）..."
+# gcc -m32 -no-pie -o as_sysenter as_sysenter.S -nostdlib
+# echo "[*] as_sysenter を実行しています..."
+# ./as_sysenter | tee output.log
+# echo "[*] 実行完了。出力は output.log に保存されました。"
 
-echo "[*] as_sysenter を実行しています..."
-./as_sysenter | tee output.log
-
+echo "[*] as_syscall をビルドしています（64ビット）..."
+gcc -nostdlib -static -o as_syscall as_syscall.S
+echo "[*] as_syscall を実行しています..."
+./as_syscall | tee output.log
 echo "[*] 実行完了。出力は output.log に保存されました。"
