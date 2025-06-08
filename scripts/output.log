@@ -1,1 +1,3 @@
-0
+parent process
+child process
+pid = 108 exited with status = 12
