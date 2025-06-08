@@ -10,6 +10,7 @@ RUN apt-get update && \
         gcc-multilib \
         libc6-dev-i386 \
         nasm \
+        procps \
         locales && \
     sed -i 's/^# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen && \
     locale-gen && \
