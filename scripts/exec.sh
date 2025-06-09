@@ -164,4 +164,4 @@ set -e
 
 gcc -o getpgid getpgid.c
 ./getpgid | tee output.log
-rm -f getegid
+rm -f getpgid
