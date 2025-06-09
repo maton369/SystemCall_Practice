@@ -178,6 +178,12 @@ set -e
 # ./getsid | tee output.log
 # rm -f getsid
 
+# gcc -o getgroups getgroups.c
+# ./getgroups | tee output.log
+# rm -f getgroups
+
 gcc -o getgroups getgroups.c
-./getgroups | tee output.log
+gcc -o setgroups setgroups.c
+./setgroups | tee output.log
+rm -f setgroups
 rm -f getgroups
