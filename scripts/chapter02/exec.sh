@@ -188,6 +188,10 @@ set -e
 # rm -f setgroups
 # rm -f getgroups
 
-gcc -o getrusage getrusage.c
-./getrusage | tee output.log
-rm -f getrusage
+# gcc -o getrusage getrusage.c
+# ./getrusage | tee output.log
+# rm -f getrusage
+
+gcc -o getrlimit getrlimit.c
+./getrlimit | tee output.log
+rm -f getrlimit
