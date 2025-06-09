@@ -182,8 +182,12 @@ set -e
 # ./getgroups | tee output.log
 # rm -f getgroups
 
-gcc -o getgroups getgroups.c
-gcc -o setgroups setgroups.c
-./setgroups | tee output.log
-rm -f setgroups
-rm -f getgroups
+# gcc -o getgroups getgroups.c
+# gcc -o setgroups setgroups.c
+# ./setgroups | tee output.log
+# rm -f setgroups
+# rm -f getgroups
+
+gcc -o getrusage getrusage.c
+./getrusage | tee output.log
+rm -f getrusage
