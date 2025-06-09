@@ -137,27 +137,31 @@ set -e
 # echo "[*] クリーンアップ..."
 # rm -f seteuid
 
-echo "[*] setreuid.c をビルド中..."
-gcc -o setreuid setreuid.c
-id apache &>/dev/null || useradd -r apache
-echo "[*] setuid テスト: apache 所有 + SUID で実行"
-chown apache setreuid
-chmod u+s setreuid
-echo "[*] 実行ファイルの属性:"
-ls -l setreuid
-ls -n setreuid
-echo "[*] 現在のユーザー:"
-id
-echo "[*] 実行:"
-./setreuid || true
-echo
-echo "[*] root 所有に切り替え（root特権再昇格テスト）..."
-chown root setreuid
-chmod u+s setreuid
-echo "[*] 実行ファイルの属性:"
-ls -l setreuid
-echo "[*] 再実行:"
-./setreuid || true
-echo
-echo "[*] クリーンアップ..."
-rm -f setreuid
+# echo "[*] setreuid.c をビルド中..."
+# gcc -o setreuid setreuid.c
+# id apache &>/dev/null || useradd -r apache
+# echo "[*] setuid テスト: apache 所有 + SUID で実行"
+# chown apache setreuid
+# chmod u+s setreuid
+# echo "[*] 実行ファイルの属性:"
+# ls -l setreuid
+# ls -n setreuid
+# echo "[*] 現在のユーザー:"
+# id
+# echo "[*] 実行:"
+# ./setreuid || true
+# echo
+# echo "[*] root 所有に切り替え（root特権再昇格テスト）..."
+# chown root setreuid
+# chmod u+s setreuid
+# echo "[*] 実行ファイルの属性:"
+# ls -l setreuid
+# echo "[*] 再実行:"
+# ./setreuid || true
+# echo
+# echo "[*] クリーンアップ..."
+# rm -f setreuid
+
+gcc -o getpgid getpgid.c
+./getpgid | tee output.log
+rm -f getegid
