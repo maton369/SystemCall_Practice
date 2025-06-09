@@ -170,6 +170,10 @@ set -e
 # (./setpgid &) | tee output.log
 # rm -f setpgid
 
-gcc -o setsid setsid.c
-./setsid | tee output.log
-rm -f setsid
+# gcc -o setsid setsid.c
+# ./setsid | tee output.log
+# rm -f setsid
+
+gcc -o getsid getsid.c
+./getsid | tee output.log
+rm -f getsid
