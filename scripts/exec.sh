@@ -111,28 +111,53 @@ set -e
 # echo "[*] クリーンアップ..."
 # rm -f setuid
 
-echo "[*] seteuid.c をビルド中..."
-gcc -o seteuid seteuid.c
-if ! id apache >/dev/null 2>&1; then
-  echo "[*] 一時ユーザー 'apache' を作成中..."
-  useradd -M -s /sbin/nologin apache
-fi
-echo "[*] apache 所有の seteuid 実行ファイルを作成..."
-chown apache seteuid
-chmod u+s seteuid
-echo "[*] seteuid 実行ファイルの属性:"
-ls -l seteuid
-ls -n seteuid
-echo "[*] 現在のユーザー情報:"
+# echo "[*] seteuid.c をビルド中..."
+# gcc -o seteuid seteuid.c
+# if ! id apache >/dev/null 2>&1; then
+#   echo "[*] 一時ユーザー 'apache' を作成中..."
+#   useradd -M -s /sbin/nologin apache
+# fi
+# echo "[*] apache 所有の seteuid 実行ファイルを作成..."
+# chown apache seteuid
+# chmod u+s seteuid
+# echo "[*] seteuid 実行ファイルの属性:"
+# ls -l seteuid
+# ls -n seteuid
+# echo "[*] 現在のユーザー情報:"
+# id
+# echo "[*] ./seteuid を一般ユーザーで実行:"
+# ./seteuid || true
+# echo
+# echo "[*] root 所有に戻して再実行（rootの動作確認）..."
+# chown root seteuid
+# chmod u+s seteuid
+# ls -l seteuid
+# ./seteuid || true | tee output.log
+# echo
+# echo "[*] クリーンアップ..."
+# rm -f seteuid
+
+echo "[*] setreuid.c をビルド中..."
+gcc -o setreuid setreuid.c
+id apache &>/dev/null || useradd -r apache
+echo "[*] setuid テスト: apache 所有 + SUID で実行"
+chown apache setreuid
+chmod u+s setreuid
+echo "[*] 実行ファイルの属性:"
+ls -l setreuid
+ls -n setreuid
+echo "[*] 現在のユーザー:"
 id
-echo "[*] ./seteuid を一般ユーザーで実行:"
-./seteuid || true
+echo "[*] 実行:"
+./setreuid || true
 echo
-echo "[*] root 所有に戻して再実行（rootの動作確認）..."
-chown root seteuid
-chmod u+s seteuid
-ls -l seteuid
-./seteuid || true | tee output.log
+echo "[*] root 所有に切り替え（root特権再昇格テスト）..."
+chown root setreuid
+chmod u+s setreuid
+echo "[*] 実行ファイルの属性:"
+ls -l setreuid
+echo "[*] 再実行:"
+./setreuid || true
 echo
 echo "[*] クリーンアップ..."
-rm -f seteuid
+rm -f setreuid
