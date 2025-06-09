@@ -162,6 +162,10 @@ set -e
 # echo "[*] クリーンアップ..."
 # rm -f setreuid
 
-gcc -o getpgid getpgid.c
-./getpgid | tee output.log
-rm -f getpgid
+# gcc -o getpgid getpgid.c
+# ./getpgid | tee output.log
+# rm -f getpgid
+
+gcc -o setpgid setpgid.c
+(./setpgid &) | tee output.log
+rm -f setpgid

@@ -1,16 +1,24 @@
-#include <unistd.h>   // setpgid(), sleep()
-#include <stdio.h>    // perror()
+#include <unistd.h>
+#include <stdio.h>
 
 int main()
 {
-    // プロセスグループIDを自身のPIDと同じに設定（通常これはデフォルト）
+    pid_t pid = getpid();
+    pid_t pgid = getpgid(0);
+
+    printf("Before setpgid: PID = %d, PGID = %d\n", pid, pgid);
+    fflush(stdout);  // バッファを強制フラッシュ
+
     if (setpgid(0, 0) < 0) {
         perror("setpgid");
         return 1;
     }
 
-    // PGID変更後の処理（例：確認用にスリープ）
-    sleep(60);
+    pgid = getpgid(0);
+    printf("After setpgid: PID = %d, PGID = %d\n", pid, pgid);
+    fflush(stdout);
+
+    sleep(1);
 
     return 0;
 }

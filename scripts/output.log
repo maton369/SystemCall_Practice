@@ -1,1 +1,2 @@
-pgid = 208
+Before setpgid: PID = 275, PGID = 267
+After setpgid: PID = 275, PGID = 275
