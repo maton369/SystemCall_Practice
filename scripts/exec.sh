@@ -174,6 +174,10 @@ set -e
 # ./setsid | tee output.log
 # rm -f setsid
 
-gcc -o getsid getsid.c
-./getsid | tee output.log
-rm -f getsid
+# gcc -o getsid getsid.c
+# ./getsid | tee output.log
+# rm -f getsid
+
+gcc -o getgroups getgroups.c
+./getgroups | tee output.log
+rm -f getgroups
