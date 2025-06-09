@@ -196,6 +196,6 @@ set -e
 # ./getrlimit | tee output.log
 # rm -f getrlimit
 
-gcc -o setrlimit setrlimit.c
-./setrlimit | tee output.log
-rm -f setrlimit
+# gcc -o setrlimit setrlimit.c
+# ./setrlimit | tee output.log
+# rm -f setrlimit
