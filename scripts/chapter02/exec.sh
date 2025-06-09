@@ -192,6 +192,10 @@ set -e
 # ./getrusage | tee output.log
 # rm -f getrusage
 
-gcc -o getrlimit getrlimit.c
-./getrlimit | tee output.log
-rm -f getrlimit
+# gcc -o getrlimit getrlimit.c
+# ./getrlimit | tee output.log
+# rm -f getrlimit
+
+gcc -o setrlimit setrlimit.c
+./setrlimit | tee output.log
+rm -f setrlimit
